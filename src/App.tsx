@@ -6,10 +6,10 @@ interface CircleProps {
   color:string
 }
 
+const initialState : Array<CircleProps> = []
 
 function App() {
-  const [initialCircle,setInitialCircle] = useState<Array<CircleProps>>([])
-  const [circles,setCircles] = useState<Array<CircleProps>>(initialCircle)
+  const [circles,setCircles] = useState<Array<CircleProps>>(initialState)
 
   useEffect(() => {
     if(!circles) return
@@ -34,7 +34,7 @@ function App() {
 
   const removeAllCircles = () => {
     if(!circles.length)return 
-    setCircles(initialCircle)
+    setCircles(initialState)
   }
 
   return (

@@ -5,9 +5,11 @@ interface CircleProps {
   clientY:number,
   color:string
 }
-function App() {
-  const [circles,setCircles] = useState<Array<CircleProps>>([])
 
+
+function App() {
+  const [initialCircle,setInitialCircle] = useState<Array<CircleProps>>([])
+  const [circles,setCircles] = useState<Array<CircleProps>>(initialCircle)
 
   useEffect(() => {
     if(!circles) return
@@ -15,23 +17,36 @@ function App() {
 
 
   const handlePosition = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    var randomColor = Math.floor(Math.random()*16777215).toString(16);
+    const randomColor = Math.floor(Math.random()*16777215).toString(16);
     const position = { 
       clientX: e.clientX,
       clientY: e.clientY,
       color:randomColor
     } as CircleProps
-    setCircles([...circles,position])
+    setCircles((prev) => [...prev,position])
   }
   
+  const removeLastCircle = () => {
+    setCircles((prev) => [...prev.slice(0,-1)])
+  }
+
+  const removeAllCircles = () => {
+    setCircles(initialCircle)
+  }
+
   return (
-    <S.AppContainer role="button" onClick={(e:  React.MouseEvent<HTMLDivElement, MouseEvent>) => handlePosition(e)}>
+    <>
+       <S.undoButton onClick={removeLastCircle}>Desfazer</S.undoButton>
+       <S.restartButton onClick={removeAllCircles}>Refazer</S.restartButton>
+      <S.AppContainer role="button" onClick={(e:  React.MouseEvent<HTMLDivElement, MouseEvent>) => handlePosition(e)}>
       {circles?.map((circle,index:number) => {
-         return(
+        return(
           <S.AppPointer color={circle.color} clientX={circle.clientX} clientY={circle.clientY} key={index} />
-         )
-      })}
+          )
+        })}
+      
     </S.AppContainer>
+      </>
   )
 }
 

@@ -23,3 +23,22 @@ export  const AppPointer = styled.span<SpanProps>`
   `}
 
 `
+const defaultButton = styled.button`
+  width: fit-content;
+  height: fit-content;
+  border-radius: 6px;
+  color:#FFFFFF;
+  position: absolute;
+  z-index: 1;
+  border: 1px solid #252525;
+`
+export const undoButton = styled(defaultButton)`
+  top: 10%;
+  background: #252525;
+  right:46%;
+`
+export const restartButton = styled(defaultButton)`
+top:10%;
+right: 52%;
+background:#252525;
+`

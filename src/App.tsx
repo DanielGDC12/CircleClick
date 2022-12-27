@@ -17,6 +17,7 @@ function App() {
 
 
   const handlePosition = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    
     const randomColor = Math.floor(Math.random()*16777215).toString(16);
     const position = { 
       clientX: e.clientX,
@@ -27,10 +28,12 @@ function App() {
   }
   
   const removeLastCircle = () => {
+    if(!circles.length)return 
     setCircles((prev) => [...prev.slice(0,-1)])
   }
 
   const removeAllCircles = () => {
+    if(!circles.length)return 
     setCircles(initialCircle)
   }
 
